@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_small"
+    app:cardBackgroundColor="@color/primaryLightColor"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/header_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primaryColor"
+            android:text="Caption"
+            style="@style/TextAppearance.MaterialComponents.Headline6"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/descriptions_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_small"
+            android:text="@string/large_text"
+            tools:text="@string/large_text" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:text="fr, 14 feb 2021"/>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
