@@ -1,6 +1,7 @@
 package com.cocos.develop.noteadvanced.ui.home
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.FragmentHomeBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
+import com.cocos.develop.noteadvanced.utils.noteDefault
 
 class HomeFragment : Fragment() {
 
@@ -51,7 +53,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.searchFab.setOnClickListener {openScreen(R.id.navigation_dashboard)}
+        binding.searchFab.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable(NOTE_DATA, noteDefault())
+            openScreen(R.id.detailFragment, bundle)
+        }
         initRV()
     }
 

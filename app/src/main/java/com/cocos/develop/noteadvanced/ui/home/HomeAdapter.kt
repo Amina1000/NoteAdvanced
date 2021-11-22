@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cocos.develop.noteadvanced.data.NoteData
-import com.cocos.develop.noteadvanced.data.noteListCreator
 import com.cocos.develop.noteadvanced.databinding.NoteItemBinding
+import com.cocos.develop.noteadvanced.utils.noteListCreator
 
 /**
  * homework com.cocos.develop.noteadvanced.ui.home
@@ -54,8 +54,8 @@ class HomeAdapter(private var onListItemClickListener: OnListItemClickListener) 
             itemView.setOnClickListener { openInNewWindow(noteData) }
         }
     }
-    private fun openInNewWindow(listItemData: NoteData) {
-        onListItemClickListener.onItemClick(listItemData)
+    private fun openInNewWindow(ItemData: NoteData) {
+        onListItemClickListener.onItemClick(ItemData)
     }
 
     interface OnListItemClickListener {
