@@ -1,34 +1,26 @@
 package com.cocos.develop.noteadvanced.ui.details
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
+import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.databinding.FragmentDetailBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+const val NOTE_DATA = "NOTE_DATA"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DitailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class DitailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+class DetailFragment : Fragment() {
+
+    private val noteData: NoteData? by lazy {
+        arguments?.getParcelable(NOTE_DATA)
     }
+    private val binding: FragmentDetailBinding by viewBinding (FragmentDetailBinding::bind)
+    private lateinit var detailViewModel: DetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,25 +28,34 @@ class DitailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail, container, false)
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DitailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DitailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViewModel()
+        initView()
+
     }
+
+    private fun initView() {
+        noteData?.let {
+            binding.headerEditText.setText(it.name)
+            binding.descriptionsTextview.setText(it.description)
+            binding.dateTextView.text = it.date
+        }
+
+    }
+
+    private fun setViewModelData() {
+        noteData?.let {
+            detailViewModel.setData(it)
+        }
+    }
+    private fun initViewModel() {
+        detailViewModel =
+            ViewModelProvider(this)[DetailViewModel::class.java]
+        detailViewModel.subscribe()
+    }
+
 }

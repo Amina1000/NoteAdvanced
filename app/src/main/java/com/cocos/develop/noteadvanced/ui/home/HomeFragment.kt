@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.FragmentHomeBinding
+import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
 
 class HomeFragment : Fragment() {
 
@@ -25,7 +26,9 @@ class HomeFragment : Fragment() {
     private val onListItemClickListener: HomeAdapter.OnListItemClickListener =
         object : HomeAdapter.OnListItemClickListener {
             override fun onItemClick(data: NoteData) {
-                openScreen(R.id.detailFragment)
+                val bundle = Bundle()
+                bundle.putParcelable(NOTE_DATA,data)
+                openScreen(R.id.detailFragment, bundle)
             }
         }
 
@@ -63,9 +66,12 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun openScreen(target: Int){
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).also {
-            it.navigate(target)
+    fun openScreen(target: Int,bundle: Bundle?=null){
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).also {nav->
+            bundle?.let{
+                nav.navigate(target,bundle)
+            }?:nav.navigate(target)
+
         }
     }
 }
