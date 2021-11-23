@@ -18,8 +18,8 @@ class HomeAdapter(private var onListItemClickListener: OnListItemClickListener) 
 
     private var data: List<NoteData> = arrayListOf()
 
-    fun setData() {
-        this.data = noteListCreator()
+    fun setData(noteList:List<NoteData>) {
+        this.data = noteList
         notifyDataSetChanged()
     }
 

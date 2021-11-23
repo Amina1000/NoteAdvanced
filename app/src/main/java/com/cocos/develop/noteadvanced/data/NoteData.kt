@@ -11,12 +11,10 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 data class NoteData(
-
-    val id: String,
-    val userId: String,
-    val name:String,
-    val description:String,
-    val date: String,
+    var id: String,
+    val userId: String?,
+    var name:String?,
+    var description:String?,
+    var date: String?,
     var favorite:Boolean = false
-
 ):Parcelable

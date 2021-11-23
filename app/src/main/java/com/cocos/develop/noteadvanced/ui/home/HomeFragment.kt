@@ -9,20 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.databinding.FragmentDetailBinding
 import com.cocos.develop.noteadvanced.databinding.FragmentHomeBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
 import com.cocos.develop.noteadvanced.utils.noteDefault
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-    private var _binding: FragmentHomeBinding? = null
+    private val homeViewModel: HomeViewModel by viewModel()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding: FragmentHomeBinding by viewBinding (FragmentHomeBinding::bind)
     private val adapter by lazy { HomeAdapter(onListItemClickListener) }
 
     private val onListItemClickListener: HomeAdapter.OnListItemClickListener =
@@ -39,37 +39,39 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-
-        })
-        return root
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRV()
+        iniViewModel()
+        initView()
+    }
+
+    private fun initView() {
         binding.searchFab.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable(NOTE_DATA, noteDefault())
             openScreen(R.id.detailFragment, bundle)
         }
-        initRV()
+    }
+
+    private fun iniViewModel() {
+        homeViewModel.getData()
+        homeViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
 
     private fun initRV() {
-        adapter.setData()
         val recyclerView = binding.mainActivityRecyclerview
         recyclerView.adapter = adapter
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+    private fun renderData(noteDataList: List<NoteData>){
+        if (noteDataList.isNotEmpty()){
+            adapter.setData(noteDataList)
+        }
     }
 
     fun openScreen(target: Int,bundle: Bundle?=null){

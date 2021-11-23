@@ -55,6 +55,7 @@ class DetailFragment : Fragment() {
         binding.saveButton.setOnClickListener {
             setViewModelData()
         }
+        binding.favoriteFab.setSrc(noteData?.favorite)
         binding.favoriteFab.setOnClickListener {
             noteData?.run {
                 this.favorite = !this.favorite
@@ -83,6 +84,15 @@ class DetailFragment : Fragment() {
 
     private fun setViewModelData() {
         noteData?.let {
+            if (it.id.isEmpty()){
+                it.id = UUID.randomUUID().toString()
+            }
+            with(binding){
+                it.date = this.dateTextView.text.toString()
+                it.description = this.descriptionsTextview.text.toString()
+                it.name = this.headerEditText.text.toString()
+            }
+
             detailViewModel.setData(it)
         }
     }
