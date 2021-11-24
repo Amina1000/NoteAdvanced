@@ -1,32 +1,28 @@
-package com.cocos.develop.noteadvanced.ui.home
+package com.cocos.develop.noteadvanced.ui.notifications
 
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
-import com.cocos.develop.noteadvanced.databinding.FragmentDetailBinding
-import com.cocos.develop.noteadvanced.databinding.FragmentHomeBinding
+import com.cocos.develop.noteadvanced.databinding.FragmentFavoriteBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
-import com.cocos.develop.noteadvanced.utils.noteDefault
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private val homeViewModel: HomeViewModel by viewModel()
 
-    private val binding: FragmentHomeBinding by viewBinding (FragmentHomeBinding::bind)
-    private val adapter by lazy { HomeAdapter(onListItemClickListener) }
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
-    private val onListItemClickListener: HomeAdapter.OnListItemClickListener =
-        object : HomeAdapter.OnListItemClickListener {
+    private val binding: FragmentFavoriteBinding by viewBinding (FragmentFavoriteBinding::bind)
+    private val adapter by lazy { FavoriteAdapter(onListItemClickListener) }
+
+    private val onListItemClickListener: FavoriteAdapter.OnListItemClickListener =
+        object : FavoriteAdapter.OnListItemClickListener {
             override fun onItemClick(data: NoteData) {
                 val bundle = Bundle()
                 bundle.putParcelable(NOTE_DATA,data)
@@ -39,27 +35,20 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRV()
         iniViewModel()
-        initView()
     }
 
-    private fun initView() {
-        binding.searchFab.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putParcelable(NOTE_DATA, noteDefault())
-            openScreen(R.id.detailFragment, bundle)
-        }
-    }
+
 
     private fun iniViewModel() {
-        homeViewModel.getData()
-        homeViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
+        favoriteViewModel.getData()
+        favoriteViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
 
     private fun initRV() {
@@ -75,7 +64,7 @@ class HomeFragment : Fragment() {
     }
 
     fun openScreen(target: Int,bundle: Bundle?=null){
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).also {nav->
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).also { nav->
             bundle?.let{
                 nav.navigate(target,bundle)
             }?:nav.navigate(target)

@@ -1,4 +1,4 @@
-package com.cocos.develop.noteadvanced.ui.home
+package com.cocos.develop.noteadvanced.ui.details
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,33 +10,39 @@ import com.cocos.develop.noteadvanced.rx.SchedulerProvider
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.koin.java.KoinJavaComponent
 
-class HomeViewModel : ViewModel() {
+/**
+ * homework com.cocos.develop.noteadvanced.ui.details
+ *
+ * @author Amina
+ * 22.11.2021
+ */
+class DetailViewModel: ViewModel() {
 
-    private val _homeLiveData = MutableLiveData<List<NoteData>>()
-    private val homeLiveData: LiveData<List<NoteData>> = _homeLiveData
+    private val _detailsLiveData = MutableLiveData<NoteData>()
+    private val detailsLiveData: LiveData<NoteData> = _detailsLiveData
 
     private var currentDisposable = CompositeDisposable()
     private val schedulerProvider: SchedulerProvider = SchedulerProvider()
     private val usersRepoImpl : LocalRepository by KoinJavaComponent.inject(LocalRepository::class.java)
 
-    fun subscribe(): LiveData<List<NoteData>> {
-        return homeLiveData
+    fun subscribe(): LiveData<NoteData> {
+        return detailsLiveData
     }
 
-    fun getData() {
+    fun setData(data: NoteData) {
         currentDisposable.add(
-            usersRepoImpl.getNotes()
+            usersRepoImpl.putNote(data)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
-                    { noteList -> _homeLiveData.postValue(noteList) },
-                    { error -> Log.e("Note list loader", error.message.toString()) })
+                    { Log.i("Note Data Save", "save note data success") },
+                    { error -> Log.e("Note Data Save", error.message.toString()) })
 
         )
     }
 
     override fun onCleared() {
-        currentDisposable.clear()
         super.onCleared()
+        currentDisposable.clear()
     }
 }

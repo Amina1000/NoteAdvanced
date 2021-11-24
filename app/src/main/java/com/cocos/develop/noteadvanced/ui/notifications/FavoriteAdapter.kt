@@ -1,19 +1,20 @@
-package com.cocos.develop.noteadvanced.ui.home
+package com.cocos.develop.noteadvanced.ui.notifications
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.NoteItemBinding
+import com.cocos.develop.noteadvanced.ui.home.HomeAdapter
 
 /**
- * homework com.cocos.develop.noteadvanced.ui.home
+ * homework com.cocos.develop.noteadvanced.ui.notifications
  *
  * @author Amina
- * 16.11.2021
+ * 24.11.2021
  */
-class HomeAdapter(private var onListItemClickListener: OnListItemClickListener) :
-    RecyclerView.Adapter<HomeAdapter.RecyclerItemViewHolder>() {
+class FavoriteAdapter(private var onListItemClickListener: OnListItemClickListener) :
+    RecyclerView.Adapter<FavoriteAdapter.RecyclerItemViewHolder>() {
 
     private var data: List<NoteData> = arrayListOf()
 

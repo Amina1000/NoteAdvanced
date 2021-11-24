@@ -1,4 +1,4 @@
-package com.cocos.develop.noteadvanced.ui.home
+package com.cocos.develop.noteadvanced.ui.notifications
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,26 +10,26 @@ import com.cocos.develop.noteadvanced.rx.SchedulerProvider
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.koin.java.KoinJavaComponent
 
-class HomeViewModel : ViewModel() {
+class FavoriteViewModel : ViewModel() {
 
-    private val _homeLiveData = MutableLiveData<List<NoteData>>()
-    private val homeLiveData: LiveData<List<NoteData>> = _homeLiveData
+    private val _favoriteLiveData = MutableLiveData<List<NoteData>>()
+    private val favoriteLiveData: LiveData<List<NoteData>> = _favoriteLiveData
 
     private var currentDisposable = CompositeDisposable()
     private val schedulerProvider: SchedulerProvider = SchedulerProvider()
     private val usersRepoImpl : LocalRepository by KoinJavaComponent.inject(LocalRepository::class.java)
 
     fun subscribe(): LiveData<List<NoteData>> {
-        return homeLiveData
+        return favoriteLiveData
     }
 
     fun getData() {
         currentDisposable.add(
-            usersRepoImpl.getNotes()
+            usersRepoImpl.getFavorite()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
-                    { noteList -> _homeLiveData.postValue(noteList) },
+                    { noteList -> _favoriteLiveData.postValue(noteList) },
                     { error -> Log.e("Note list loader", error.message.toString()) })
 
         )
