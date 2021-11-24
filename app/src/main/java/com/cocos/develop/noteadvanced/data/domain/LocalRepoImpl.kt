@@ -23,6 +23,12 @@ class LocalRepoImpl(db: NoteDataBase):LocalRepository {
       }
     }
 
+    override fun getFavorite(): Single<List<NoteData>> {
+        return noteDao.getFavorite().map {
+            noteEntityListMap(it)
+        }
+    }
+
     override fun putNote(noteData: NoteData): Completable {
         return noteDao.insert(noteDataMap(noteData))
     }

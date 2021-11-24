@@ -6,6 +6,7 @@ import com.cocos.develop.noteadvanced.data.domain.LocalRepository
 import com.cocos.develop.noteadvanced.data.room.NoteDataBase
 import com.cocos.develop.noteadvanced.ui.details.DetailViewModel
 import com.cocos.develop.noteadvanced.ui.home.HomeViewModel
+import com.cocos.develop.noteadvanced.ui.notifications.FavoriteViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -56,4 +57,8 @@ val homeScreen = module {
 
 val detailScreen = module {
     viewModel { DetailViewModel() }
+}
+
+val favoriteScreen = module {
+    viewModel { FavoriteViewModel() }
 }

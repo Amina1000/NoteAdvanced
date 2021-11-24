@@ -13,5 +13,6 @@ import io.reactivex.rxjava3.core.Single
  */
 interface LocalRepository {
     fun getNotes():Single<List<NoteData>>
+    fun getFavorite():Single<List<NoteData>>
     fun putNote(noteData: NoteData):Completable
 }

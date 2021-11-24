@@ -29,9 +29,9 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.cocos.develop.noteadvanced.ui.notifications.NotificationsFragment"
+        android:name="com.cocos.develop.noteadvanced.ui.notifications.FavoriteFragment"
         android:label="@string/title_favorite"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.cocos.develop.noteadvanced.ui.details.DetailFragment"
