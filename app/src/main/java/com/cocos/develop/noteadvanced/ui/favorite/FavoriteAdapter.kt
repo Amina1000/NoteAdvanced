@@ -1,11 +1,10 @@
-package com.cocos.develop.noteadvanced.ui.notifications
+package com.cocos.develop.noteadvanced.ui.favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.NoteItemBinding
-import com.cocos.develop.noteadvanced.ui.home.HomeAdapter
 
 /**
  * homework com.cocos.develop.noteadvanced.ui.notifications

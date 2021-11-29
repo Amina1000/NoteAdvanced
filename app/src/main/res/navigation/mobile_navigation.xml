@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/startFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.cocos.develop.noteadvanced.ui.notifications.FavoriteFragment"
+        android:name="com.cocos.develop.noteadvanced.ui.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
@@ -37,4 +37,13 @@
         android:name="com.cocos.develop.noteadvanced.ui.details.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.cocos.develop.noteadvanced.ui.start.StartFragment"
+        android:label="Authorization"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>
