@@ -13,8 +13,8 @@ import androidx.room.PrimaryKey
 @Entity
 class NoteEntity(
     @PrimaryKey
-    val id: String,
-    val userId: String?,
+    val id: Int,
+    val userId: Int?,
     val name:String?,
     val description:String?,
     val date: String?,

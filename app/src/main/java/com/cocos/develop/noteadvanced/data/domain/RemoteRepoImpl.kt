@@ -19,9 +19,10 @@ class RemoteRepoImpl(private val noteApi: NoteApi):RemoteRepository {
         noteApi.post(user)
 
 
-    override fun getNotes(): Single<List<NoteData>> {
-        TODO("Not yet implemented")
+    override fun getNotes(access: String): Single<List<NoteData>> {
+        return noteApi.getNotes(access)
     }
+
 
     override fun getFavorite(): Single<List<NoteData>> {
         TODO("Not yet implemented")

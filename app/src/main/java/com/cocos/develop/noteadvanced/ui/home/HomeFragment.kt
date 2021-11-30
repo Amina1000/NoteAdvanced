@@ -12,6 +12,7 @@ import com.cocos.develop.noteadvanced.databinding.FragmentHomeBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
 import com.cocos.develop.noteadvanced.utils.noteDefault
 import com.cocos.develop.noteadvanced.utils.openScreen
+import com.cocos.develop.noteadvanced.utils.readPrefAccess
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -54,7 +55,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun iniViewModel() {
-        homeViewModel.getData()
+        homeViewModel.getData(readPrefAccess(context))
         homeViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
 

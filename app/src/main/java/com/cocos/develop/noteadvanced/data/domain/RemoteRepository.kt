@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Single
  */
 interface RemoteRepository {
     fun getToken(user: User): Single<Token>
-    fun getNotes(): Single<List<NoteData>>
+    fun getNotes(access:String): Single<List<NoteData>>
     fun getFavorite(): Single<List<NoteData>>
     fun putNote(noteData: NoteData): Completable
 }

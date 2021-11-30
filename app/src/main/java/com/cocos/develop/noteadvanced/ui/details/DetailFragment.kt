@@ -83,9 +83,7 @@ class DetailFragment : Fragment() {
 
     private fun setViewModelData() {
         noteData?.let {
-            if (it.id.isEmpty()){
-                it.id = UUID.randomUUID().toString()
-            }
+
             with(binding){
                 it.date = this.dateTextView.text.toString()
                 it.description = this.descriptionsTextview.text.toString()

@@ -1,6 +1,7 @@
 package com.cocos.develop.noteadvanced.data
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -11,10 +12,10 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 data class NoteData(
-    var id: String,
-    val userId: String?,
-    var name:String?,
-    var description:String?,
-    var date: String?,
-    var favorite:Boolean = false
+    @field:SerializedName("id") var id: Int,
+    @field:SerializedName("author") val userId: Int?,
+    @field:SerializedName("title") var name:String?,
+    @field:SerializedName("text") var description:String?,
+    @field:SerializedName("created") var date: String?,
+    @field:SerializedName("is_favorites") var favorite:Boolean = false
 ):Parcelable

@@ -1,10 +1,13 @@
 package com.cocos.develop.noteadvanced.utils
 
 import android.app.Activity
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import androidx.navigation.Navigation
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.room.NoteEntity
 
 /**
@@ -14,8 +17,10 @@ import com.cocos.develop.noteadvanced.data.room.NoteEntity
  * 22.11.2021
  */
 
+const val TOKEN = "TOKEN"
+
 fun noteDefault(): NoteData {
-    return NoteData("", "", "", "", "")
+    return NoteData(1, 0, "", "", "")
 }
 
 fun noteEntityListMap(users: List<NoteEntity>) =
@@ -40,6 +45,7 @@ fun noteDataMap(noteData: NoteData) = NoteEntity(
     noteData.date,
     noteData.favorite
 )
+
 fun openScreen(activity: Activity, target: Int,bundle: Bundle?=null){
     Navigation.findNavController(activity, R.id.nav_host_fragment_activity_main).also { nav->
         bundle?.let{
@@ -47,4 +53,11 @@ fun openScreen(activity: Activity, target: Int,bundle: Bundle?=null){
         }?:nav.navigate(target)
 
     }
+}
+
+fun readPrefAccess(context: Context?):String?{
+    // Специальный класс для хранения настроек
+    val sharedPref = context?.getSharedPreferences(TOKEN, MODE_PRIVATE);
+    // Считываем значения настроек
+    return sharedPref?.getString("access",null)
 }

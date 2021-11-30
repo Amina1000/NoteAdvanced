@@ -14,11 +14,12 @@ import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.User
 import com.cocos.develop.noteadvanced.databinding.FragmentStartBinding
+import com.cocos.develop.noteadvanced.utils.TOKEN
 import com.cocos.develop.noteadvanced.utils.openScreen
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-const val TOKEN = "TOKEN"
+
 const val REG_URI = "http://194.58.108.107/auth/register/"
 
 class StartFragment : Fragment() {
@@ -88,7 +89,7 @@ class StartFragment : Fragment() {
         val editor = sharedPreferences?.edit()
         editor?.let {
             it.putString("refresh", token.refresh)
-            it.putString("access", token.access)
+            it.putString("access", "Bearer " + token.access)
             it.apply()
         }
     }
