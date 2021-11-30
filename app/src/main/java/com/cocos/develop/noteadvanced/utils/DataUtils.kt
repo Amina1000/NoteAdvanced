@@ -1,5 +1,9 @@
 package com.cocos.develop.noteadvanced.utils
 
+import android.app.Activity
+import android.os.Bundle
+import androidx.navigation.Navigation
+import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.data.room.NoteEntity
 
@@ -36,3 +40,11 @@ fun noteDataMap(noteData: NoteData) = NoteEntity(
     noteData.date,
     noteData.favorite
 )
+fun openScreen(activity: Activity, target: Int,bundle: Bundle?=null){
+    Navigation.findNavController(activity, R.id.nav_host_fragment_activity_main).also { nav->
+        bundle?.let{
+            nav.navigate(target,bundle)
+        }?:nav.navigate(target)
+
+    }
+}

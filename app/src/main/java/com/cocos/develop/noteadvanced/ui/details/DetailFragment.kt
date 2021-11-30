@@ -17,7 +17,6 @@ import java.util.*
 
 const val NOTE_DATA = "NOTE_DATA"
 
-
 class DetailFragment : Fragment() {
 
     private val noteData: NoteData? by lazy {

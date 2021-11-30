@@ -11,6 +11,7 @@ import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.FragmentFavoriteBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
+import com.cocos.develop.noteadvanced.utils.openScreen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
@@ -26,7 +27,7 @@ class FavoriteFragment : Fragment() {
             override fun onItemClick(data: NoteData) {
                 val bundle = Bundle()
                 bundle.putParcelable(NOTE_DATA,data)
-                openScreen(R.id.detailFragment, bundle)
+                openScreen( requireActivity(), R.id.detailFragment, bundle)
             }
         }
 
@@ -63,12 +64,4 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    fun openScreen(target: Int,bundle: Bundle?=null){
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).also { nav->
-            bundle?.let{
-                nav.navigate(target,bundle)
-            }?:nav.navigate(target)
-
-        }
-    }
 }

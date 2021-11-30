@@ -13,6 +13,6 @@ import retrofit2.http.*
  */
 interface NoteApi {
     @Headers("Content-Type: application/json")
-    @POST("/token")
+    @POST("/api/token/")
     fun post(@Body user: User): Single<Token>
 }

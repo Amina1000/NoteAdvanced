@@ -10,6 +10,7 @@ import com.cocos.develop.noteadvanced.data.room.NoteDataBase
 import com.cocos.develop.noteadvanced.ui.details.DetailViewModel
 import com.cocos.develop.noteadvanced.ui.home.HomeViewModel
 import com.cocos.develop.noteadvanced.ui.favorite.FavoriteViewModel
+import com.cocos.develop.noteadvanced.ui.start.StartViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -59,6 +60,10 @@ val repoModule = module {
 
 val homeScreen = module {
     viewModel { HomeViewModel() }
+}
+
+val startScreen = module {
+    viewModel { StartViewModel() }
 }
 
 val detailScreen = module {
