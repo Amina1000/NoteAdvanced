@@ -4,7 +4,6 @@ import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.User
 import com.cocos.develop.noteadvanced.data.datasource.NoteApi
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -13,7 +12,7 @@ import io.reactivex.rxjava3.core.Single
  * @author Amina
  * 29.11.2021
  */
-class RemoteRepoImpl(private val noteApi: NoteApi):RemoteRepository {
+class RemoteRepoImpl(private val noteApi: NoteApi) : RemoteRepository {
 
     override fun getToken(user: User): Single<Token> =
         noteApi.post(user)
@@ -28,7 +27,11 @@ class RemoteRepoImpl(private val noteApi: NoteApi):RemoteRepository {
         TODO("Not yet implemented")
     }
 
-    override fun putNote(noteData: NoteData): Completable {
-        TODO("Not yet implemented")
+    override fun putNote(access: String, noteData: NoteData): Single<NoteData> {
+        return if (noteData.id == 1) {
+            noteApi.postNote(access, noteData)
+        } else {
+            noteApi.putNote(noteData.id,access,noteData)
+        }
     }
 }

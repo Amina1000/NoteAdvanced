@@ -13,9 +13,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class NoteData(
     @field:SerializedName("id") var id: Int,
-    @field:SerializedName("author") val userId: Int?,
     @field:SerializedName("title") var name:String?,
     @field:SerializedName("text") var description:String?,
     @field:SerializedName("created") var date: String?,
+    @field:SerializedName("is_active") var active:Boolean = true,
     @field:SerializedName("is_favorites") var favorite:Boolean = false
 ):Parcelable

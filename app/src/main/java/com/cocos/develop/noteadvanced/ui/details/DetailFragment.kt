@@ -1,6 +1,8 @@
 package com.cocos.develop.noteadvanced.ui.details
 
 import android.app.DatePickerDialog
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.FragmentDetailBinding
+import com.cocos.develop.noteadvanced.utils.readPrefAccess
 import com.cocos.develop.noteadvanced.utils.setSrc
 import java.util.*
 
@@ -71,7 +74,12 @@ class DetailFragment : Fragment() {
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, monthOfYear)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                binding.dateTextView.setText(calendar.time.toString())
+                var formatted = calendar.time.toString()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    val format1 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+                    formatted = format1.format(calendar.time)
+                }
+                binding.dateTextView.setText(formatted)
                 binding.dateTextView.inputType = 0
             },
             calendar.get(Calendar.YEAR),
@@ -90,7 +98,7 @@ class DetailFragment : Fragment() {
                 it.name = this.headerEditText.text.toString()
             }
 
-            detailViewModel.setData(it)
+            detailViewModel.setData(readPrefAccess(context), it)
         }
     }
     private fun initViewModel() {

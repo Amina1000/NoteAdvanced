@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        binding.searchFab.setOnClickListener {
+        binding.createFab.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable(NOTE_DATA, noteDefault())
             openScreen(requireActivity(), R.id.detailFragment, bundle)
