@@ -16,5 +16,5 @@ interface RemoteRepository {
     fun getToken(user: User): Single<Token>
     fun getNotes(access:String): Single<List<NoteData>>
     fun getFavorite(): Single<List<NoteData>>
-    fun putNote(noteData: NoteData): Completable
+    fun putNote(access:String,noteData: NoteData): Single<NoteData>
 }

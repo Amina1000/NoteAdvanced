@@ -20,7 +20,7 @@ import com.cocos.develop.noteadvanced.data.room.NoteEntity
 const val TOKEN = "TOKEN"
 
 fun noteDefault(): NoteData {
-    return NoteData(1, 0, "", "", "")
+    return NoteData(1, "", "", "")
 }
 
 fun noteEntityListMap(users: List<NoteEntity>) =
@@ -30,7 +30,6 @@ fun noteEntityListMap(users: List<NoteEntity>) =
 
 fun noteEntityMap(noteEntity: NoteEntity) = NoteData(
     noteEntity.id,
-    noteEntity.userId,
     noteEntity.name,
     noteEntity.description,
     noteEntity.date,
@@ -39,7 +38,6 @@ fun noteEntityMap(noteEntity: NoteEntity) = NoteData(
 
 fun noteDataMap(noteData: NoteData) = NoteEntity(
     noteData.id,
-    noteData.userId,
     noteData.name,
     noteData.description,
     noteData.date,

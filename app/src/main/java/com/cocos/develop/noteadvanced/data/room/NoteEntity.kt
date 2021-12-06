@@ -14,7 +14,6 @@ import androidx.room.PrimaryKey
 class NoteEntity(
     @PrimaryKey
     val id: Int,
-    val userId: Int?,
     val name:String?,
     val description:String?,
     val date: String?,
