@@ -23,8 +23,8 @@ class RemoteRepoImpl(private val noteApi: NoteApi) : RemoteRepository {
     }
 
 
-    override fun getFavorite(): Single<List<NoteData>> {
-        TODO("Not yet implemented")
+    override fun getFavorite(access: String): Single<List<NoteData>> {
+        return  noteApi.getFavorite(access)
     }
 
     override fun putNote(access: String, noteData: NoteData): Single<NoteData> {

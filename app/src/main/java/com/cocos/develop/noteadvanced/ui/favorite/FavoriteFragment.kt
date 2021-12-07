@@ -12,6 +12,7 @@ import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.FragmentFavoriteBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
 import com.cocos.develop.noteadvanced.utils.openScreen
+import com.cocos.develop.noteadvanced.utils.readPrefAccess
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
@@ -48,7 +49,7 @@ class FavoriteFragment : Fragment() {
 
 
     private fun iniViewModel() {
-        favoriteViewModel.getData()
+        favoriteViewModel.getData(readPrefAccess(context))
         favoriteViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
 

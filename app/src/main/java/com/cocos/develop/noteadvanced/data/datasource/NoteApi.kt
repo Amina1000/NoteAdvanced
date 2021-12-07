@@ -25,4 +25,7 @@ interface NoteApi {
 
     @PUT("/api/notes/{id}/")
     fun putNote(@Path("id") id:Int, @Header("Authorization") access:String, @Body noteData: NoteData): Single<NoteData>
+
+    @GET("/api/favorites/")
+    fun getFavorite(@Header("Authorization") access:String): Single<List<NoteData>>
 }
