@@ -15,4 +15,7 @@
     <string name="sing_up">sing up</string>
     <string name="caption">Caption</string>
     <string name="date_time">fr, 14 feb 2021</string>
+    <string name="deleting">Note is deleting, please wait.</string>
+    <string name="saving">Note is saving, please wait.</string>
+    <string name="waiting">please waiting</string>
 </resources>

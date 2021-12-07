@@ -9,12 +9,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/margin_small"
         app:cardBackgroundColor="@color/primaryLightColor"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,37 +30,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/primaryColor"
+                android:gravity="center"
                 android:hint="@string/note_caption" />
 
-            <EditText
-                android:id="@+id/descriptions_textview"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_x_small"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:inputType="textMultiLine"
-                android:minLines="8"
-                android:gravity="start"
-                tools:text="@string/large_text" />
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/descriptions_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_x_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:gravity="start"
+                    android:inputType="textMultiLine"
+                    android:minLines="8"
+                    android:scrollbars="vertical"
+                    tools:text="@string/large_text" />
+            </ScrollView>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_xx_medium"
                 android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_xx_medium"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:hint="@string/add_date"
                 app:endIconCheckable="true"
                 app:endIconDrawable="@drawable/ic_twotone_edit_calendar_24"
                 app:endIconMode="custom">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/date_text_view"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:padding="@dimen/margin_small"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,25 +79,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_marginEnd="@dimen/margin_small"
                 android:layout_marginTop="@dimen/margin_medium"
-                app:tint = "@color/primaryLightColor"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:contentDescription="@string/add_to_favorite"
                 android:src="@drawable/ic_baseline_favorite_border"
-                android:contentDescription="@string/add_to_favorite" />
+                app:tint="@color/primaryLightColor" />
+
         </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/actions_tab"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_percent="0.1">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
+            android:layout_gravity="start"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_small"
             android:text="@string/save_changes"
             android:textColor="@color/secondaryColor"
             app:icon="@drawable/ic_twotone_save_as_24" />
 
-    </androidx.cardview.widget.CardView>
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/remove_note"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_twotone_delete_45"
+            android:tint="@color/secondaryLightColor" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,8 +14,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.FragmentDetailBinding
+import com.cocos.develop.noteadvanced.utils.openScreen
 import com.cocos.develop.noteadvanced.utils.readPrefAccess
 import com.cocos.develop.noteadvanced.utils.setSrc
+import com.cocos.develop.noteadvanced.utils.showSnackBar
 import java.util.*
 
 const val NOTE_DATA = "NOTE_DATA"
@@ -64,9 +66,21 @@ class DetailFragment : Fragment() {
                 binding.favoriteFab.setSrc(this.favorite)
             }
         }
-
+        binding.removeNote.setOnClickListener {
+            removeNote()
+        }
 
     }
+
+    private fun removeNote() {
+        binding.cardView.showSnackBar(getString(R.string.deleting))
+        noteData?.let { note->
+            note.active = false
+            detailViewModel.setData(readPrefAccess(context), note)
+        }
+        openScreen(requireActivity(), R.id.navigation_home)
+    }
+
     private fun onClickDate(v: View) {
         DatePickerDialog(
             requireContext(),
@@ -90,15 +104,15 @@ class DetailFragment : Fragment() {
     }
 
     private fun setViewModelData() {
-        noteData?.let {
+        binding.cardView.showSnackBar(getString(R.string.saving))
+        noteData?.let {note->
 
             with(binding){
-                it.date = this.dateTextView.text.toString()
-                it.description = this.descriptionsTextview.text.toString()
-                it.name = this.headerEditText.text.toString()
+                note.date = this.dateTextView.text.toString()
+                note.description = this.descriptionsTextview.text.toString()
+                note.name = this.headerEditText.text.toString()
             }
-
-            detailViewModel.setData(readPrefAccess(context), it)
+            detailViewModel.setData(readPrefAccess(context), note)
         }
     }
     private fun initViewModel() {

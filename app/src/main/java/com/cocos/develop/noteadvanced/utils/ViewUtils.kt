@@ -1,6 +1,8 @@
 package com.cocos.develop.noteadvanced.utils
+import android.view.View
 import com.cocos.develop.noteadvanced.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * homework com.cocos.develop.noteadvanced.utils
@@ -17,4 +19,12 @@ fun FloatingActionButton.setSrc(favorite: Boolean?){
         }
     }
 
+}
+fun View.showSnackBar(
+    message: String,
+    length: Int = Snackbar.LENGTH_SHORT
+) {
+    Snackbar
+        .make(this, message, length)
+        .show()
 }
