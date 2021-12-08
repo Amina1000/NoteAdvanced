@@ -24,7 +24,7 @@ import java.util.*
 const val TOKEN = "TOKEN"
 
 fun noteDefault(): NoteData {
-    return NoteData(1, "", "", "")
+    return NoteData(1, "", "", getDate(Calendar.getInstance().time))
 }
 
 fun noteEntityListMap(users: List<NoteEntity>) =
