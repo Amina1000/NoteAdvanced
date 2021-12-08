@@ -14,8 +14,8 @@
         app:cardBackgroundColor="@color/primaryLightColor"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
+        app:layout_constraintHeight_percent="0.75"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,7 +36,7 @@
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:hint="@string/note_caption"
-                    android:textSize="@dimen/header_text_size" />
+                    android:textSize="@dimen/text_size_large" />
             </FrameLayout>
 
             <ScrollView
@@ -54,6 +54,7 @@
                     android:gravity="start"
                     android:inputType="textMultiLine"
                     android:minLines="8"
+                    android:textSize="16sp"
                     android:scrollbars="vertical"
                     tools:text="@string/large_text" />
             </ScrollView>
@@ -64,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:hint="@string/add_date"
                 app:endIconCheckable="true"
@@ -102,9 +103,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
@@ -120,8 +121,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/remove_note"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_small"
