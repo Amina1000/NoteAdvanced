@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.NoteItemBinding
+import com.cocos.develop.noteadvanced.utils.parsDate
 
 /**
  * homework com.cocos.develop.noteadvanced.ui.home
@@ -47,7 +48,9 @@ class HomeAdapter(private var onListItemClickListener: OnListItemClickListener) 
                 if (layoutPosition != RecyclerView.NO_POSITION) {
                     this.headerTextview.text = noteData.name
                     this.descriptionsTextview.text = noteData.description
-                    this.dateTextView.text = noteData.date
+                    noteData.date?.let{
+                        this.dateTextView.text = parsDate(it)
+                    }
                 }
             }
             itemView.setOnClickListener { openInNewWindow(noteData) }

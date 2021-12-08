@@ -3,12 +3,16 @@ package com.cocos.develop.noteadvanced.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.os.Bundle
 import androidx.navigation.Navigation
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
-import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.room.NoteEntity
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * homework com.cocos.develop.noteadvanced.utils
@@ -44,18 +48,39 @@ fun noteDataMap(noteData: NoteData) = NoteEntity(
     noteData.favorite
 )
 
-fun openScreen(activity: Activity, target: Int,bundle: Bundle?=null){
-    Navigation.findNavController(activity, R.id.nav_host_fragment_activity_main).also { nav->
-        bundle?.let{
-            nav.navigate(target,bundle)
-        }?:nav.navigate(target)
+fun openScreen(activity: Activity, target: Int, bundle: Bundle? = null) {
+    Navigation.findNavController(activity, R.id.nav_host_fragment_activity_main).also { nav ->
+        bundle?.let {
+            nav.navigate(target, bundle)
+        } ?: nav.navigate(target)
 
     }
 }
 
-fun readPrefAccess(context: Context?):String?{
+fun readPrefAccess(context: Context?): String? {
     // Специальный класс для хранения настроек
-    val sharedPref = context?.getSharedPreferences(TOKEN, MODE_PRIVATE);
+    val sharedPref = context?.getSharedPreferences(TOKEN, MODE_PRIVATE)
     // Считываем значения настроек
-    return sharedPref?.getString("access",null)
+    return sharedPref?.getString("access", null)
+}
+
+fun getDate(date: Date): String {
+    var formatted = date.toString()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        val format1 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+        formatted = format1.format(date)
+    }
+    return formatted
+}
+
+
+fun parsDate(formatted: String): String {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val parsedDate =
+            LocalDate.parse(formatted, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+        val dTF = DateTimeFormatter.ofPattern("dd MMMM uuuu")
+        dTF.format(parsedDate)
+    } else {
+        formatted
+    }
 }

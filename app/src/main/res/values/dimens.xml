@@ -15,4 +15,6 @@
     <dimen name="margin_x_large">35dp</dimen>
     <dimen name="margin_xx_large">40dp</dimen>
     <dimen name="margin_xxx_large">100dp</dimen>
+    <dimen name="header_text_size">24sp</dimen>
+    <dimen name="date_text_size">16sp</dimen>
 </resources>

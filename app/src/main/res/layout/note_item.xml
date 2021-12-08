@@ -13,19 +13,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/header_textview"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primaryColor"
-            android:gravity="center"
-            android:text="@string/caption"
-            style="@style/TextAppearance.MaterialComponents.Headline6"/>
+            android:background="@color/primaryColor">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/header_textview"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/caption"
+                android:textSize="@dimen/header_text_size"/>
+        </FrameLayout>
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/descriptions_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_x_small"
             android:minLines="3"
             android:maxLines="6"
@@ -35,9 +43,11 @@
             android:id="@+id/date_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
             android:gravity="end"
             android:maxLength="19"
-            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:textSize="@dimen/date_text_size"
             android:text="@string/date_time"/>
 
     </LinearLayout>

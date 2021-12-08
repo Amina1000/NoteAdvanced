@@ -14,10 +14,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.databinding.FragmentDetailBinding
-import com.cocos.develop.noteadvanced.utils.openScreen
-import com.cocos.develop.noteadvanced.utils.readPrefAccess
-import com.cocos.develop.noteadvanced.utils.setSrc
-import com.cocos.develop.noteadvanced.utils.showSnackBar
+import com.cocos.develop.noteadvanced.utils.*
 import java.util.*
 
 const val NOTE_DATA = "NOTE_DATA"
@@ -27,9 +24,10 @@ class DetailFragment : Fragment() {
     private val noteData: NoteData? by lazy {
         arguments?.getParcelable(NOTE_DATA)
     }
-    private val binding: FragmentDetailBinding by viewBinding (FragmentDetailBinding::bind)
+    private val binding: FragmentDetailBinding by viewBinding(FragmentDetailBinding::bind)
     private lateinit var detailViewModel: DetailViewModel
     private val calendar = Calendar.getInstance()
+    private var formatted = getDate(calendar.time)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +50,9 @@ class DetailFragment : Fragment() {
         noteData?.let {
             binding.headerEditText.setText(it.name)
             binding.descriptionsTextview.setText(it.description)
-            binding.dateTextView.setText(it.date)
+            it.date?.let { date ->
+                binding.dateTextView.setText(parsDate(date))
+            }
             binding.dateTextView.inputType = 0
         }
         binding.inputLayout.setEndIconOnClickListener(this::onClickDate)
@@ -74,7 +74,7 @@ class DetailFragment : Fragment() {
 
     private fun removeNote() {
         binding.cardView.showSnackBar(getString(R.string.deleting))
-        noteData?.let { note->
+        noteData?.let { note ->
             note.active = false
             detailViewModel.setData(readPrefAccess(context), note)
         }
@@ -88,12 +88,8 @@ class DetailFragment : Fragment() {
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, monthOfYear)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                var formatted = calendar.time.toString()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                    val format1 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
-                    formatted = format1.format(calendar.time)
-                }
-                binding.dateTextView.setText(formatted)
+                formatted = getDate(calendar.time)
+                binding.dateTextView.setText(parsDate(formatted))
                 binding.dateTextView.inputType = 0
             },
             calendar.get(Calendar.YEAR),
@@ -105,16 +101,17 @@ class DetailFragment : Fragment() {
 
     private fun setViewModelData() {
         binding.cardView.showSnackBar(getString(R.string.saving))
-        noteData?.let {note->
+        noteData?.let { note ->
 
-            with(binding){
-                note.date = this.dateTextView.text.toString()
+            with(binding) {
+                note.date = formatted
                 note.description = this.descriptionsTextview.text.toString()
                 note.name = this.headerEditText.text.toString()
             }
             detailViewModel.setData(readPrefAccess(context), note)
         }
     }
+
     private fun initViewModel() {
         detailViewModel =
             ViewModelProvider(this)[DetailViewModel::class.java]
