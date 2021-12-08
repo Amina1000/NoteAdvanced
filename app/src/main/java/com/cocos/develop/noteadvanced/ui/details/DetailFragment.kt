@@ -1,8 +1,6 @@
 package com.cocos.develop.noteadvanced.ui.details
 
 import android.app.DatePickerDialog
-import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +66,10 @@ class DetailFragment : Fragment() {
         }
         binding.removeNote.setOnClickListener {
             removeNote()
+        }
+        binding.textClear.setOnClickListener {
+            binding.descriptionsTextview.setText("")
+            binding.headerEditText.setText("")
         }
 
     }

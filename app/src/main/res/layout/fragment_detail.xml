@@ -14,8 +14,8 @@
         app:cardBackgroundColor="@color/primaryLightColor"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
-        app:layout_constraintHeight_percent="0.75"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,20 +24,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/primaryColor">
+                android:background="@color/primaryColor"
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/header_edit_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
                     android:hint="@string/note_caption"
-                    android:textSize="@dimen/text_size_large" />
-            </FrameLayout>
+                    android:textSize="@dimen/text_size_large"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/text_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:srcCompat="@drawable/ic_baseline_format_clear_24" />
+            </LinearLayout>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -54,8 +66,8 @@
                     android:gravity="start"
                     android:inputType="textMultiLine"
                     android:minLines="8"
-                    android:textSize="16sp"
                     android:scrollbars="vertical"
+                    android:textSize="16sp"
                     tools:text="@string/large_text" />
             </ScrollView>
 
@@ -103,9 +115,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
-        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
