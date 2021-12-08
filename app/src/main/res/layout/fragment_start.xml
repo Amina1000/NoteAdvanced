@@ -36,7 +36,7 @@
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_xx_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:hint="put password">
+        android:hint="@string/put_password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_text_view"

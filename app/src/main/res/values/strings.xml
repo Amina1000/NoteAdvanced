@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Note advanced</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Settings</string>
     <string name="title_favorite">Favorite</string>
     <string name="large_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="note_caption">Caption</string>
     <string name="save_changes">save changes</string>
     <string name="add_to_favorite">add to favorite</string>
@@ -18,4 +18,7 @@
     <string name="deleting">Note is deleting, please wait.</string>
     <string name="saving">Note is saving, please wait.</string>
     <string name="waiting">please waiting</string>
+    <string name="Authorization">Authorization</string>
+    <string name="put_password">put password</string>
+    <string name="fragment_detail">Edit</string>
 </resources>

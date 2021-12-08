@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Заметки</string>
+    <string name="title_home">Главная</string>
+    <string name="title_dashboard">Настройки</string>
+    <string name="title_favorite">Избранное</string>
+    <string name="large_text">Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века.</string>
+    <string name="note_caption">Заголовок</string>
+    <string name="save_changes">сохранить</string>
+    <string name="add_to_favorite">добавить в избранное</string>
+    <string name="add_date">выбрать дату</string>
+    <string name="put_email">введите email</string>
+    <string name="caption">Заголовок</string>
+    <string name="date_time">14 февраля 2020</string>
+    <string name="deleting">Заметка удаляется, пожалуйста подождите</string>
+    <string name="saving">Заметка сохраняется, пожалуйста подождите</string>
+    <string name="waiting">пожалуйста подождите</string>
+    <string name="Authorization">Авторизация</string>
+    <string name="put_password">введите пароль</string>
+    <string name="sing_in">Войти</string>
+    <string name="sing_up">Регистрация</string>
+    <string name="fragment_detail">Редактировать</string>
+</resources>

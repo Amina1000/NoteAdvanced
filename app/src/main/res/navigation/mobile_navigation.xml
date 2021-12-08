@@ -35,12 +35,12 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.cocos.develop.noteadvanced.ui.details.DetailFragment"
-        android:label="fragment_detail"
+        android:label="@string/fragment_detail"
         tools:layout="@layout/fragment_detail" />
     <fragment
         android:id="@+id/startFragment"
         android:name="com.cocos.develop.noteadvanced.ui.start.StartFragment"
-        android:label="Authorization"
+        android:label="@string/Authorization"
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_navigation_home"
