@@ -21,4 +21,6 @@
     <string name="Authorization">Authorization</string>
     <string name="put_password">put password</string>
     <string name="fragment_detail">Edit</string>
+    <string name="put_name">put name</string>
+    <string name="put_last_name">put last name</string>
 </resources>

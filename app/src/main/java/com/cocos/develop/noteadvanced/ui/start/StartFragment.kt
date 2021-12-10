@@ -53,7 +53,7 @@ class StartFragment : Fragment() {
             val email = binding.emailTextView.text.toString()
             val password = binding.passwordTextView.text.toString()
             if (email != "" && password != "") {
-                user = User(email, password)
+                user = User(email, password,null,null)
                 user?.let {
                     startViewModel.getData(it)
                 }
