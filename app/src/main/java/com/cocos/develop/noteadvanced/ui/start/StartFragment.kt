@@ -20,8 +20,6 @@ import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-const val REG_URI = "http://194.58.108.107/auth/register/"
-
 class StartFragment : Fragment() {
 
     private val binding: FragmentStartBinding by viewBinding(FragmentStartBinding::bind)
@@ -53,7 +51,7 @@ class StartFragment : Fragment() {
             val email = binding.emailTextView.text.toString()
             val password = binding.passwordTextView.text.toString()
             if (email != "" && password != "") {
-                user = User(email, password,null,null)
+                user = User(1,email, password,null,null)
                 user?.let {
                     startViewModel.getData(it)
                 }
@@ -68,9 +66,7 @@ class StartFragment : Fragment() {
         }
 
         binding.singUpButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(REG_URI)
-            })
+            openScreen(requireActivity(), R.id.navigation_dashboard)
         }
     }
 

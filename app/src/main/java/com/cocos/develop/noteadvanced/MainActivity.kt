@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.startFragment ->  binding.navView.isVisible = false
+                R.id.navigation_dashboard ->  binding.navView.isVisible = false
                 else ->  binding.navView.isVisible = true
             }
         }

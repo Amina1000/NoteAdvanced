@@ -20,4 +20,8 @@
     <string name="sing_in">Войти</string>
     <string name="sing_up">Регистрация</string>
     <string name="fragment_detail">Редактировать</string>
+    <string name="put_name">введите имя</string>
+    <string name="put_last_name">введите фамилию</string>
+    <string name="error_row">поля email и пароль не могут быть пустыми</string>
+    <string name="save_profile">Профиль сохраняется, пожалуйста подождите</string>
 </resources>

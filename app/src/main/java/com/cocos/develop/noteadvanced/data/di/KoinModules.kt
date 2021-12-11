@@ -7,6 +7,7 @@ import com.cocos.develop.noteadvanced.data.domain.LocalRepository
 import com.cocos.develop.noteadvanced.data.domain.RemoteRepoImpl
 import com.cocos.develop.noteadvanced.data.domain.RemoteRepository
 import com.cocos.develop.noteadvanced.data.room.NoteDataBase
+import com.cocos.develop.noteadvanced.ui.dashboard.DashboardViewModel
 import com.cocos.develop.noteadvanced.ui.details.DetailViewModel
 import com.cocos.develop.noteadvanced.ui.home.HomeViewModel
 import com.cocos.develop.noteadvanced.ui.favorite.FavoriteViewModel
@@ -68,6 +69,10 @@ val startScreen = module {
 
 val detailScreen = module {
     viewModel { DetailViewModel() }
+}
+
+val dashboardScreen = module {
+    viewModel { DashboardViewModel() }
 }
 
 val favoriteScreen = module {

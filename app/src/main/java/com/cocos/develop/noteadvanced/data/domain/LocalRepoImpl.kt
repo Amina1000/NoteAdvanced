@@ -1,9 +1,10 @@
 package com.cocos.develop.noteadvanced.data.domain
 
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.data.User
 import com.cocos.develop.noteadvanced.data.room.NoteDataBase
-import com.cocos.develop.noteadvanced.utils.noteDataMap
-import com.cocos.develop.noteadvanced.utils.noteEntityListMap
+import com.cocos.develop.noteadvanced.utils.*
+import com.cocos.develop.noteadvanced.utils.userEntityMap
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
@@ -16,6 +17,7 @@ import io.reactivex.rxjava3.core.Single
 class LocalRepoImpl(db: NoteDataBase):LocalRepository {
 
     private val noteDao = db.noteDao()
+    private val userDao = db.userDao()
 
     override fun getNotes(): Single<List<NoteData>> {
       return noteDao.all().map {
@@ -31,5 +33,15 @@ class LocalRepoImpl(db: NoteDataBase):LocalRepository {
 
     override fun putNote(noteData: NoteData): Completable {
         return noteDao.insert(noteDataMap(noteData))
+    }
+
+    override fun getUsers(): Single<List<User>> {
+       return userDao.getUser().map {
+           userEntityListMap(it)
+       }
+    }
+
+    override fun putUser(user: User): Completable {
+       return  userDao.insert(userDataMap(user))
     }
 }

@@ -17,10 +17,12 @@
     <string name="date_time">fr, 14 feb 2021</string>
     <string name="deleting">Note is deleting, please wait.</string>
     <string name="saving">Note is saving, please wait.</string>
+    <string name="save_profile">Profile is saving, please wait.</string>
     <string name="waiting">please waiting</string>
     <string name="Authorization">Authorization</string>
     <string name="put_password">put password</string>
     <string name="fragment_detail">Edit</string>
     <string name="put_name">put name</string>
     <string name="put_last_name">put last name</string>
+    <string name="error_row">the password and email fields cannot be empty</string>
 </resources>
