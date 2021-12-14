@@ -56,7 +56,6 @@ class DashboardFragment : Fragment() {
             }
             user?.run{
                 dashboardViewModel.setData(readPrefAccess(context),this)
-                openScreen(requireActivity(), R.id.startFragment)
                 binding.navigationDashboard.showSnackBar(getString(R.string.save_profile))
             }
         }else{

@@ -14,8 +14,10 @@ import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.User
 import com.cocos.develop.noteadvanced.databinding.FragmentStartBinding
+import com.cocos.develop.noteadvanced.ui.dashboard.DashboardViewModel
 import com.cocos.develop.noteadvanced.utils.TOKEN
 import com.cocos.develop.noteadvanced.utils.openScreen
+import com.cocos.develop.noteadvanced.utils.readPrefAccess
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +27,7 @@ class StartFragment : Fragment() {
     private val binding: FragmentStartBinding by viewBinding(FragmentStartBinding::bind)
     private var user: User? = null
     private val startViewModel: StartViewModel by viewModel()
+    private val dashboardViewModel: DashboardViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +46,15 @@ class StartFragment : Fragment() {
 
     private fun iniViewModel() {
         startViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
+        dashboardViewModel.getData(readPrefAccess(context))
+        dashboardViewModel.subscribe().observe(viewLifecycleOwner, { renderMail(it) })
+    }
+
+    private fun renderMail(users: List<User>?) {
+        if (!users.isNullOrEmpty()) {
+            user = users.last()
+            setUser()
+        }
     }
 
     private fun initView() {
@@ -77,6 +89,11 @@ class StartFragment : Fragment() {
         }
     }
 
+    private fun setUser() {
+        user?.let {
+            binding.emailTextView.setText(it.email)
+        }
+    }
     private fun setTokenSettings(token: Token) {
 
         val sharedPreferences: SharedPreferences? =
