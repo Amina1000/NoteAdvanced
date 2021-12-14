@@ -10,4 +10,9 @@
     <string name="save_changes">save changes</string>
     <string name="add_to_favorite">add to favorite</string>
     <string name="add_date">add date</string>
+    <string name="put_email">put email</string>
+    <string name="sing_in">Sing in</string>
+    <string name="sing_up">sing up</string>
+    <string name="caption">Caption</string>
+    <string name="date_time">fr, 14 feb 2021</string>
 </resources>

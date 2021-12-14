@@ -19,7 +19,7 @@ class NoteApp: Application() {
             // declare used Android context
             androidContext(this@NoteApp)
             // declare modules
-            modules(application, repoModule, homeScreen, detailScreen,favoriteScreen)
+            modules(application, apiModule, repoModule, homeScreen, detailScreen,favoriteScreen, startScreen)
         }
     }
 }

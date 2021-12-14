@@ -1,4 +1,4 @@
-package com.cocos.develop.noteadvanced.ui.notifications
+package com.cocos.develop.noteadvanced.ui.favorite
 
 import android.util.Log
 import androidx.lifecycle.LiveData
