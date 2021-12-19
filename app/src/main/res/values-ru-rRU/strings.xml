@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Заметки</string>
+    <string name="app_name">Заметочник</string>
     <string name="title_home">Главная</string>
     <string name="title_dashboard">Настройки</string>
     <string name="title_favorite">Избранное</string>
@@ -24,4 +24,7 @@
     <string name="put_last_name">введите фамилию</string>
     <string name="error_row">поля email и пароль не могут быть пустыми</string>
     <string name="save_profile">Профиль сохраняется, пожалуйста подождите</string>
+    <string name="about_text">Бесплатный кроссплатформенный сервис для создания и хранения заметок. Поддерживает WEB и IOS платформы</string>
+    <string name="website_button_text">Перейти на сайт</string>
+    <string name="about_fragment">О нас</string>
 </resources>

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_notifications"
             app:destination="@id/navigation_notifications" />
+        <action
+            android:id="@+id/action_navigation_home_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
 
     <fragment
@@ -46,4 +49,8 @@
             android:id="@+id/action_startFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.cocos.develop.noteadvanced.ui.about.AboutFragment"
+        android:label="@string/about_fragment" />
 </navigation>

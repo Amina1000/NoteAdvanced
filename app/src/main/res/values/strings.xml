@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Note advanced</string>
+    <string name="app_name">Note exchange</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Settings</string>
     <string name="title_favorite">Favorite</string>
@@ -24,4 +24,7 @@
     <string name="put_name">put name</string>
     <string name="put_last_name">put last name</string>
     <string name="error_row">the password and email fields cannot be empty</string>
+    <string name="website_button_text">website</string>
+    <string name="about_text">Free cross-platform service for creating and storing notes. Supports WEB and IOS platforms</string>
+    <string name="about_fragment">About us</string>
 </resources>
