@@ -4,6 +4,7 @@ import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.User
 import com.cocos.develop.noteadvanced.data.datasource.NoteApi
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -32,6 +33,14 @@ class RemoteRepoImpl(private val noteApi: NoteApi) : RemoteRepository {
             noteApi.postNote(access, noteData)
         } else {
             noteApi.putNote(noteData.id,access,noteData)
+        }
+    }
+
+    override fun putUser(access: String?,user: User): Single<User>{
+        return if (access == null) {
+            noteApi.postUser(user)
+        } else {
+            noteApi.putUser(user.id,access,user)
         }
     }
 }

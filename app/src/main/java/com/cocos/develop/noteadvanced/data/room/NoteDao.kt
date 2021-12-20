@@ -16,7 +16,7 @@ interface NoteDao {
     fun all(): Single<List<NoteEntity>>
 
     @Query("SELECT * FROM NoteEntity WHERE id LIKE :id")
-    fun getDataById(id: String): Single<NoteEntity>
+    fun getDataById(id: Int): Single<NoteEntity>
 
     @Query("SELECT * FROM NoteEntity WHERE favorite = 1")
     fun getFavorite():  Single<List<NoteEntity>>

@@ -3,6 +3,7 @@ package com.cocos.develop.noteadvanced.data.datasource
 import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.User
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
@@ -16,6 +17,13 @@ interface NoteApi {
     @Headers("Content-Type: application/json")
     @POST("/api/token/")
     fun post(@Body user: User): Single<Token>
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/users/")
+    fun postUser(@Body user: User): Single<User>
+
+    @PUT("api/users/{id}/")
+    fun putUser(@Path("id") id:Int, @Header("Authorization") access:String, @Body user: User): Single<User>
 
     @GET("/api/notes/")
     fun getNotes(@Header("Authorization") access:String): Single<List<NoteData>>
