@@ -2,16 +2,14 @@ package com.cocos.develop.noteadvanced.ui.home
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.data.domain.AppState
 import com.cocos.develop.noteadvanced.databinding.FragmentHomeBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
-import com.cocos.develop.noteadvanced.utils.noteDefault
-import com.cocos.develop.noteadvanced.utils.openScreen
-import com.cocos.develop.noteadvanced.utils.readPrefAccess
+import com.cocos.develop.noteadvanced.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -64,9 +62,25 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun renderData(noteDataList: List<NoteData>){
-        if (noteDataList.isNotEmpty()){
-            adapter.setData(noteDataList)
+    private fun renderData(appState: AppState){
+
+        when (appState) {
+            is AppState.Success<*> -> {
+                val noteDataList = appState.data as List<NoteData>?
+                if (!noteDataList.isNullOrEmpty()){
+                    adapter.setData(noteDataList)
+                }
+            }
+
+            is AppState.Loading ->
+                binding.loadingFrameLayout.loadingFrame.showViewLoading()
+
+            is AppState.Error -> {
+                binding.loadingFrameLayout.loadingFrame.showViewWorking()
+                makeErrorToast(context, appState.error.message)
+            }
+
         }
     }
+
 }

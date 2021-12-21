@@ -1,9 +1,7 @@
 package com.cocos.develop.noteadvanced.ui.start
 
 import android.content.Context.MODE_PRIVATE
-import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +11,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.User
+import com.cocos.develop.noteadvanced.data.domain.AppState
 import com.cocos.develop.noteadvanced.databinding.FragmentStartBinding
 import com.cocos.develop.noteadvanced.ui.dashboard.DashboardViewModel
-import com.cocos.develop.noteadvanced.utils.TOKEN
-import com.cocos.develop.noteadvanced.utils.openScreen
-import com.cocos.develop.noteadvanced.utils.readPrefAccess
+import com.cocos.develop.noteadvanced.utils.*
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,11 +47,26 @@ class StartFragment : Fragment() {
         dashboardViewModel.subscribe().observe(viewLifecycleOwner, { renderMail(it) })
     }
 
-    private fun renderMail(users: List<User>?) {
-        if (!users.isNullOrEmpty()) {
-            user = users.last()
-            setUser()
+    private fun renderMail(appState: AppState) {
+
+        when (appState) {
+            is AppState.Success<*> -> {
+                val users = appState.data as List<User>?
+                if (!users.isNullOrEmpty()) {
+                    user = users.last()
+                    setUser()
+                }
+            }
+
+            is AppState.Loading ->
+                binding.loadingFrameLayout.loadingFrame.showViewLoading()
+
+            is AppState.Error -> {
+                binding.loadingFrameLayout.loadingFrame.showViewWorking()
+                makeErrorToast(context, appState.error.message)
+            }
         }
+
     }
 
     private fun initView() {
@@ -63,7 +75,7 @@ class StartFragment : Fragment() {
             val email = binding.emailTextView.text.toString()
             val password = binding.passwordTextView.text.toString()
             if (email != "" && password != "") {
-                user = User(1,email, password,null,null)
+                user = User(1, email, password, null, null)
                 user?.let {
                     startViewModel.getData(it)
                 }
@@ -82,10 +94,24 @@ class StartFragment : Fragment() {
         }
     }
 
-    private fun renderData(token: Token?) {
-        token?.let {
-            setTokenSettings(token)
-            openScreen(requireActivity(), R.id.navigation_home)
+    private fun renderData(appState: AppState) {
+
+        when (appState) {
+            is AppState.Success<*> -> {
+                val token = appState.data as Token?
+                token?.let {
+                    setTokenSettings(token)
+                    openScreen(requireActivity(), R.id.navigation_home)
+                }
+            }
+
+            is AppState.Loading ->
+                binding.loadingFrameLayout.loadingFrame.showViewLoading()
+
+            is AppState.Error -> {
+                binding.loadingFrameLayout.loadingFrame.showViewWorking()
+                makeErrorToast(context, appState.error.message)
+            }
         }
     }
 
@@ -94,6 +120,7 @@ class StartFragment : Fragment() {
             binding.emailTextView.setText(it.email)
         }
     }
+
     private fun setTokenSettings(token: Token) {
 
         val sharedPreferences: SharedPreferences? =

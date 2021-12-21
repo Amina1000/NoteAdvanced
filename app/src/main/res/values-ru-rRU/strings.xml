@@ -13,7 +13,7 @@
     <string name="caption">Заголовок</string>
     <string name="date_time">14 февраля 2020</string>
     <string name="deleting">Заметка удаляется, пожалуйста подождите</string>
-    <string name="saving">Заметка сохраняется, пожалуйста подождите</string>
+    <string name="saving">Заметка успешно сохранена</string>
     <string name="waiting">пожалуйста подождите</string>
     <string name="Authorization">Авторизация</string>
     <string name="put_password">введите пароль</string>
@@ -27,4 +27,5 @@
     <string name="about_text">Бесплатный кроссплатформенный сервис для создания и хранения заметок. Поддерживает WEB и IOS платформы</string>
     <string name="website_button_text">Перейти на сайт</string>
     <string name="about_fragment">О нас</string>
+    <string name="error_message">Что-то пошло не так!</string>
 </resources>

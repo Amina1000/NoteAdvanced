@@ -15,7 +15,7 @@
     <string name="caption">Caption</string>
     <string name="date_time">fr, 14 feb 2021</string>
     <string name="deleting">Note is deleting, please wait.</string>
-    <string name="saving">Note is saving, please wait.</string>
+    <string name="saving">Note have saved successfully.</string>
     <string name="save_profile">Profile is saving, please wait.</string>
     <string name="waiting">please waiting</string>
     <string name="Authorization">Authorization</string>
@@ -27,4 +27,5 @@
     <string name="website_button_text">website</string>
     <string name="about_text">Free cross-platform service for creating and storing notes. Supports WEB and IOS platforms</string>
     <string name="about_fragment">About us</string>
+    <string name="error_message">Error!</string>
 </resources>

@@ -18,11 +18,9 @@ class RemoteRepoImpl(private val noteApi: NoteApi) : RemoteRepository {
     override fun getToken(user: User): Single<Token> =
         noteApi.post(user)
 
-
     override fun getNotes(access: String): Single<List<NoteData>> {
         return noteApi.getNotes(access)
     }
-
 
     override fun getFavorite(access: String): Single<List<NoteData>> {
         return  noteApi.getFavorite(access)

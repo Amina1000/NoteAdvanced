@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.data.domain.AppState
 import com.cocos.develop.noteadvanced.databinding.FragmentDetailBinding
 import com.cocos.develop.noteadvanced.utils.*
 import java.util.*
@@ -102,7 +103,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun setViewModelData() {
-        binding.cardView.showSnackBar(getString(R.string.saving))
+
         noteData?.let { note ->
 
             with(binding) {
@@ -117,7 +118,28 @@ class DetailFragment : Fragment() {
     private fun initViewModel() {
         detailViewModel =
             ViewModelProvider(this)[DetailViewModel::class.java]
-        detailViewModel.subscribe()
+        detailViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
+    }
+
+    private fun renderData(appState: AppState) {
+
+        when (appState) {
+
+            is AppState.Success<*> -> {
+                binding.cardView.showSnackBar(getString(R.string.saving))
+                binding.loadingFrameLayout.loadingFrame.showViewWorking()
+            }
+
+            is AppState.Loading ->
+                binding.loadingFrameLayout.loadingFrame.showViewLoading()
+
+            is AppState.Error -> {
+                binding.loadingFrameLayout.loadingFrame.showViewWorking()
+                makeErrorToast(context, appState.error.message)
+            }
+
+        }
+
     }
 
 }
