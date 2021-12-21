@@ -9,7 +9,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.User
 import com.cocos.develop.noteadvanced.databinding.FragmentDashboardBinding
-import com.cocos.develop.noteadvanced.utils.openScreen
 import com.cocos.develop.noteadvanced.utils.readPrefAccess
 import com.cocos.develop.noteadvanced.utils.showSnackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel

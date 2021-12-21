@@ -75,6 +75,7 @@
             android:textColor="@color/secondaryColor" />
 
     </LinearLayout>
-
+    <include layout="@layout/loading_layout"
+        android:id="@+id/loading_frame_layout"/>
 
 </LinearLayout>
