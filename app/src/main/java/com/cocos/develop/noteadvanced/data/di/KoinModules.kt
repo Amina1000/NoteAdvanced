@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * 24.11.2021
  */
 const val DB_NAME = "noteDB"
-const val BASE_URL = "http://194.58.108.107"
+const val BASE_URL = "https://www.zametochnik.ru/"
 
 val application = module {
     single { Room.databaseBuilder(get(), NoteDataBase::class.java, DB_NAME).build() }
@@ -43,14 +43,7 @@ val apiModule = module {
 }
 
 val repoModule = module {
-//    single<GithubUsersRepo> {
-//        GithubUserRepoCombinedImpl(
-//            GithubUsersLocalRepoImpl(get()),
-//            GithubUsersWebRepoImpl(get()),
-//            NetworkStatusImpl(get()),
-//            SchedulerProvider()
-//        )
-//    }
+
     single<RemoteRepository>{
         RemoteRepoImpl(get())
     }

@@ -8,10 +8,9 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.User
+import com.cocos.develop.noteadvanced.data.domain.AppState
 import com.cocos.develop.noteadvanced.databinding.FragmentDashboardBinding
-import com.cocos.develop.noteadvanced.utils.openScreen
-import com.cocos.develop.noteadvanced.utils.readPrefAccess
-import com.cocos.develop.noteadvanced.utils.showSnackBar
+import com.cocos.develop.noteadvanced.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
@@ -68,11 +67,28 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
 
-    private fun renderData(users: List<User>?) {
-        if (!users.isNullOrEmpty()) {
-            user = users.last()
-            setUser()
+    private fun renderData(appState: AppState) {
+
+        when (appState) {
+
+            is AppState.Success<*> -> {
+                val users = appState.data as List<User>?
+                if (!users.isNullOrEmpty()) {
+                    user = users.last()
+                    setUser()
+                }
+            }
+
+            is AppState.Loading ->
+                binding.loadingFrameLayout.loadingFrame.showViewLoading()
+
+            is AppState.Error -> {
+                binding.loadingFrameLayout.loadingFrame.showViewWorking()
+                makeErrorToast(context, appState.error.message)
+            }
+
         }
+
     }
 
     private fun setUser() {

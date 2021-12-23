@@ -1,6 +1,9 @@
 package com.cocos.develop.noteadvanced
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -9,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cocos.develop.noteadvanced.databinding.ActivityMainBinding
+import com.cocos.develop.noteadvanced.utils.openScreen
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.startFragment ->  binding.navView.isVisible = false
                 R.id.navigation_dashboard ->  binding.navView.isVisible = false
+                R.id.aboutFragment ->  binding.navView.isVisible = false
                 else ->  binding.navView.isVisible = true
             }
         }
@@ -41,4 +46,16 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+         menuInflater.inflate(R.menu.main_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.about ->  openScreen(this, R.id.aboutFragment)
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }

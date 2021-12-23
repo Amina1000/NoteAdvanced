@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.data.domain.AppState
 import com.cocos.develop.noteadvanced.data.domain.LocalRepository
 import com.cocos.develop.noteadvanced.data.domain.RemoteRepository
 import com.cocos.develop.noteadvanced.rx.SchedulerProvider
@@ -19,15 +20,15 @@ import org.koin.java.KoinJavaComponent
  */
 class DetailViewModel : ViewModel() {
 
-    private val _detailsLiveData = MutableLiveData<NoteData>()
-    private val detailsLiveData: LiveData<NoteData> = _detailsLiveData
+    private val _detailsLiveData = MutableLiveData<AppState>()
+    private val detailsLiveData: LiveData<AppState> = _detailsLiveData
 
     private var currentDisposable = CompositeDisposable()
     private val schedulerProvider: SchedulerProvider = SchedulerProvider()
     private val usersRepoLocalImpl: LocalRepository by KoinJavaComponent.inject(LocalRepository::class.java)
     private val usersRepoRemoteImpl: RemoteRepository by KoinJavaComponent.inject(RemoteRepository::class.java)
 
-    fun subscribe(): LiveData<NoteData> {
+    fun subscribe(): LiveData<AppState> {
         return detailsLiveData
     }
 
@@ -36,7 +37,7 @@ class DetailViewModel : ViewModel() {
         currentDisposable.add(
             when (access) {
                 null -> {
-                    puLocalData(data)
+                    putLocalData(data)
                 }
                 else -> {
                     usersRepoRemoteImpl.putNote(access, data)
@@ -44,17 +45,19 @@ class DetailViewModel : ViewModel() {
                         .observeOn(schedulerProvider.ui())
                         .subscribe(
                             { noteData ->
-                                _detailsLiveData.postValue(noteData)
-                                puLocalData(noteData)
+                                _detailsLiveData.postValue(AppState.Success(noteData))
+                                putLocalData(noteData)
                             },
-                            { error -> Log.e("Note list loader", error.message.toString()) })
-
+                            { error ->
+                                _detailsLiveData.postValue(AppState.Error(error))
+                                Log.e("Note list loader", error.message.toString())
+                            })
                 }
             }
         )
     }
 
-    private fun puLocalData(data: NoteData) =
+    private fun putLocalData(data: NoteData) =
         usersRepoLocalImpl.putNote(data)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
@@ -66,4 +69,5 @@ class DetailViewModel : ViewModel() {
         super.onCleared()
         currentDisposable.clear()
     }
+
 }

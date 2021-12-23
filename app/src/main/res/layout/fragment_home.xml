@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/note_item"/>
+        app:spanCount="2"
+        tools:listitem="@layout/note_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create_fab"
@@ -24,8 +24,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_xx_medium"
         android:layout_marginBottom="@dimen/margin_xxx_large"
-        app:tint = "@color/primaryLightColor"
         android:src="@drawable/ic_baseline_note_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/primaryLightColor" />
+
+    <include
+        android:id="@+id/loading_frame_layout"
+        layout="@layout/loading_layout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

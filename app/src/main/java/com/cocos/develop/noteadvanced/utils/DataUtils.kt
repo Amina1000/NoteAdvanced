@@ -3,9 +3,12 @@ package com.cocos.develop.noteadvanced.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.res.Resources
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
@@ -55,6 +58,18 @@ fun userEntityListMap(users: List<UserEntity>) =
         userEntityMap(it)
     }
 
+fun makeErrorToast(context:Context?, message: String?){
+    message?.let {
+        val errorMsg = context?.resources?.getString(R.string.error_message)  + "\n"+ it
+                Toast.makeText(
+            context,
+            errorMsg,
+            Toast.LENGTH_LONG
+        ).show()
+    }
+}
+
+
 fun userEntityMap(userEntity: UserEntity) = User(
     userEntity.id,
     userEntity.email,
@@ -95,7 +110,6 @@ fun getDate(date: Date): String {
     return formatted
 }
 
-
 fun parsDate(formatted: String): String {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val parsedDate =
@@ -105,4 +119,12 @@ fun parsDate(formatted: String): String {
     } else {
         formatted
     }
+}
+
+fun View.showViewWorking() {
+    this.visibility = View.GONE
+}
+
+fun View.showViewLoading() {
+    this.visibility = View.VISIBLE
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.data.domain.AppState
 import com.cocos.develop.noteadvanced.data.domain.LocalRepository
 import com.cocos.develop.noteadvanced.data.domain.RemoteRepository
 import com.cocos.develop.noteadvanced.rx.SchedulerProvider
@@ -13,15 +14,15 @@ import org.koin.java.KoinJavaComponent
 
 class HomeViewModel : ViewModel() {
 
-    private val _homeLiveData = MutableLiveData<List<NoteData>>()
-    private val homeLiveData: LiveData<List<NoteData>> = _homeLiveData
+    private val _homeLiveData = MutableLiveData<AppState>()
+    private val homeLiveData: LiveData<AppState> = _homeLiveData
 
     private var currentDisposable = CompositeDisposable()
     private val schedulerProvider: SchedulerProvider = SchedulerProvider()
     private val usersRepoLocalImpl : LocalRepository by KoinJavaComponent.inject(LocalRepository::class.java)
     private val usersRepoRemoteImpl : RemoteRepository by KoinJavaComponent.inject(RemoteRepository::class.java)
 
-    fun subscribe(): LiveData<List<NoteData>> {
+    fun subscribe(): LiveData<AppState> {
         return homeLiveData
     }
 
@@ -33,8 +34,10 @@ class HomeViewModel : ViewModel() {
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .subscribe(
-                            { noteList -> _homeLiveData.postValue(noteList) },
-                            { error -> Log.e("Note list loader", error.message.toString()) })
+                            { noteList -> _homeLiveData.postValue(AppState.Success(noteList)) },
+                            { error ->
+                                _homeLiveData.postValue(AppState.Error(error))
+                                Log.e("Note list loader", error.message.toString()) })
 
                 }
                 else -> {
@@ -42,8 +45,10 @@ class HomeViewModel : ViewModel() {
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .subscribe(
-                            { noteList -> _homeLiveData.postValue(noteList) },
-                            { error -> Log.e("Note list loader", error.message.toString()) })
+                            { noteList -> _homeLiveData.postValue(AppState.Success(noteList)) },
+                            { error ->
+                                _homeLiveData.postValue(AppState.Error(error))
+                                Log.e("Note list loader", error.message.toString()) })
 
                 }
             }

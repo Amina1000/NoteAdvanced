@@ -105,4 +105,7 @@
         android:text="@string/save_changes"
         android:textColor="@color/secondaryColor" />
 
+    <include layout="@layout/loading_layout"
+        android:id="@+id/loading_frame_layout"/>
+
 </LinearLayout>

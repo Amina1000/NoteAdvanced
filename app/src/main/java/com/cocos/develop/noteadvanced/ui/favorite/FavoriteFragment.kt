@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.cocos.develop.noteadvanced.R
 import com.cocos.develop.noteadvanced.data.NoteData
+import com.cocos.develop.noteadvanced.data.domain.AppState
 import com.cocos.develop.noteadvanced.databinding.FragmentFavoriteBinding
 import com.cocos.develop.noteadvanced.ui.details.NOTE_DATA
-import com.cocos.develop.noteadvanced.utils.openScreen
-import com.cocos.develop.noteadvanced.utils.readPrefAccess
+import com.cocos.develop.noteadvanced.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
@@ -58,10 +57,24 @@ class FavoriteFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
+    private fun renderData(appState: AppState){
 
-    private fun renderData(noteDataList: List<NoteData>){
-        if (noteDataList.isNotEmpty()){
-            adapter.setData(noteDataList)
+        when (appState) {
+            is AppState.Success<*> -> {
+                val noteDataList = appState.data as List<NoteData>?
+                if (!noteDataList.isNullOrEmpty()){
+                    adapter.setData(noteDataList)
+                }
+            }
+
+            is AppState.Loading ->
+                binding.loadingFrameLayout.loadingFrame.showViewLoading()
+
+            is AppState.Error -> {
+                binding.loadingFrameLayout.loadingFrame.showViewWorking()
+                makeErrorToast(context, appState.error.message)
+            }
+
         }
     }
 
