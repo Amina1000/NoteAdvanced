@@ -11,7 +11,7 @@ import org.koin.core.context.startKoin
  * @author Amina
  * 24.11.2021
  */
-class NoteApp: Application() {
+class NoteApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -19,8 +19,10 @@ class NoteApp: Application() {
             // declare used Android context
             androidContext(this@NoteApp)
             // declare modules
-            modules(application, apiModule, repoModule, homeScreen, detailScreen,
-                dashboardScreen, favoriteScreen, startScreen)
+            modules(
+                application, apiModule, repoModule, homeScreen, detailScreen,
+                dashboardScreen, favoriteScreen, startScreen
+            )
         }
     }
 }

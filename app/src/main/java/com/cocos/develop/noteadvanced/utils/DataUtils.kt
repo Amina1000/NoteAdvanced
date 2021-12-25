@@ -58,10 +58,10 @@ fun userEntityListMap(users: List<UserEntity>) =
         userEntityMap(it)
     }
 
-fun makeErrorToast(context:Context?, message: String?){
+fun makeErrorToast(context: Context?, message: String?) {
     message?.let {
-        val errorMsg = context?.resources?.getString(R.string.error_message)  + "\n"+ it
-                Toast.makeText(
+        val errorMsg = context?.resources?.getString(R.string.error_message) + "\n" + it
+        Toast.makeText(
             context,
             errorMsg,
             Toast.LENGTH_LONG
