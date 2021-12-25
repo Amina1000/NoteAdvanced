@@ -68,8 +68,8 @@ class DashboardViewModel : ViewModel() {
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
             .subscribe(
-                { Log.i("Note Data Save", "save note data success") },
-                { error -> Log.e("Note Data Save", error.message.toString()) })
+                { Log.i("User data", "save note data success") },
+                { error -> Log.e("Usaer data", error.message.toString()) })
 
 
     override fun onCleared() {

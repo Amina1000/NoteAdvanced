@@ -35,10 +35,13 @@ class RemoteRepoImpl(private val noteApi: NoteApi) : RemoteRepository {
     }
 
     override fun putUser(access: String?,user: User): Single<User>{
-        return if (access == null) {
+        return if (user.id == 1) {
             noteApi.postUser(user)
         } else {
-            noteApi.putUser(user.id,access,user)
+            access?.let {
+                noteApi.putUser(user.id,it,user)
+            }
+            noteApi.postUser(user)
         }
     }
 }
