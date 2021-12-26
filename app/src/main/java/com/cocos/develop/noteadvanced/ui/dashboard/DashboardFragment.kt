@@ -53,11 +53,11 @@ class DashboardFragment : Fragment() {
                 user?.name = name
                 user?.lastName = lastName
             }
-            user?.run{
-                dashboardViewModel.setData(readPrefAccess(context),this)
+            user?.run {
+                dashboardViewModel.setData(readPrefAccess(context), this)
                 binding.navigationDashboard.showSnackBar(getString(R.string.save_profile))
             }
-        }else{
+        } else {
             binding.navigationDashboard.showSnackBar(getString(R.string.error_row))
         }
     }
@@ -72,9 +72,9 @@ class DashboardFragment : Fragment() {
         when (appState) {
 
             is AppState.Success<*> -> {
-                val users = appState.data as List<User>?
-                if (!users.isNullOrEmpty()) {
-                    user = users.last()
+                val resp = appState.data as User?
+                resp?.let {
+                    user = it
                     setUser()
                 }
             }

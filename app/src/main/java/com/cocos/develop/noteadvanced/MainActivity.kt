@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.startFragment ->  binding.navView.isVisible = false
-                R.id.navigation_dashboard ->  binding.navView.isVisible = false
-                R.id.aboutFragment ->  binding.navView.isVisible = false
-                else ->  binding.navView.isVisible = true
+                R.id.startFragment -> binding.navView.isVisible = false
+                R.id.navigation_dashboard -> binding.navView.isVisible = false
+                R.id.aboutFragment -> binding.navView.isVisible = false
+                else -> binding.navView.isVisible = true
             }
         }
         val appBarConfiguration = AppBarConfiguration(
@@ -47,13 +47,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-         menuInflater.inflate(R.menu.main_menu,menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.about ->  openScreen(this, R.id.aboutFragment)
+            R.id.about -> openScreen(this, R.id.aboutFragment)
         }
 
         return super.onOptionsItemSelected(item)

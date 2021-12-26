@@ -1,4 +1,5 @@
 package com.cocos.develop.noteadvanced.utils
+
 import android.view.View
 import com.cocos.develop.noteadvanced.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -10,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
  * @author Amina
  * 22.11.2021
  */
-fun FloatingActionButton.setSrc(favorite: Boolean?){
+fun FloatingActionButton.setSrc(favorite: Boolean?) {
     favorite?.let {
         if (it) {
             this.setImageResource(R.drawable.ic_baseline_favorite)
@@ -20,6 +21,7 @@ fun FloatingActionButton.setSrc(favorite: Boolean?){
     }
 
 }
+
 fun View.showSnackBar(
     message: String,
     length: Int = Snackbar.LENGTH_SHORT

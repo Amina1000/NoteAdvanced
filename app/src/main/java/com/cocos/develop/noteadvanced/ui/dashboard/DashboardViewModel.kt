@@ -26,14 +26,47 @@ class DashboardViewModel : ViewModel() {
         return dashboardLiveData
     }
 
+    fun getLocalData() {
+        currentDisposable.add(
+            usersRepoLocalImpl.getUsers()
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(
+                    { userList ->
+                        if (!userList.isNullOrEmpty()) {
+                            _dashboardLiveData.postValue(AppState.Success(userList.last()))
+                        }
+                    },
+                    { error ->
+                        AppState.Error(error)
+                        Log.e("User list loader", error.message.toString())
+                    })
+        )
+    }
+
     fun getData(access: String?) {
         if (access != null) {
             currentDisposable.add(
-                usersRepoLocalImpl.getUsers()
+                usersRepoRemoteImpl.getUserId(access)
                     .subscribeOn(schedulerProvider.io())
                     .observeOn(schedulerProvider.ui())
                     .subscribe(
-                        { userList -> _dashboardLiveData.postValue(AppState.Success(userList)) },
+                        { userList ->
+                            if (!userList.isNullOrEmpty()) {
+                                usersRepoRemoteImpl.getUser(userList.first().id, access)
+                                    .subscribeOn(schedulerProvider.io())
+                                    .observeOn(schedulerProvider.ui())
+                                    .subscribe(
+                                        { user ->
+                                            user.id = userList.first().id
+                                            _dashboardLiveData.postValue(AppState.Success(user))
+                                        },
+                                        { error ->
+                                            AppState.Error(error)
+                                            Log.e("User list loader", error.message.toString())
+                                        })
+                            }
+                        },
                         { error ->
                             AppState.Error(error)
                             Log.e("User list loader", error.message.toString())
@@ -50,7 +83,8 @@ class DashboardViewModel : ViewModel() {
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
                     { userData ->
-                        _dashboardLiveData.postValue(AppState.Success(listOf(userData)))
+                        userData.email = user.email
+                        _dashboardLiveData.postValue(AppState.Success(userData))
                         user.id = userData.id
                         putLocalData(user)
                         Log.i("User Data Save", "save user data success")
@@ -68,8 +102,8 @@ class DashboardViewModel : ViewModel() {
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
             .subscribe(
-                { Log.i("Note Data Save", "save note data success") },
-                { error -> Log.e("Note Data Save", error.message.toString()) })
+                { Log.i("User data", "save note data success") },
+                { error -> Log.e("Usaer data", error.message.toString()) })
 
 
     override fun onCleared() {

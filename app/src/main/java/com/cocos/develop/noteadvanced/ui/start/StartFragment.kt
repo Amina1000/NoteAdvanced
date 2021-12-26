@@ -43,7 +43,7 @@ class StartFragment : Fragment() {
 
     private fun iniViewModel() {
         startViewModel.subscribe().observe(viewLifecycleOwner, { renderData(it) })
-        dashboardViewModel.getData(readPrefAccess(context))
+        dashboardViewModel.getLocalData()
         dashboardViewModel.subscribe().observe(viewLifecycleOwner, { renderMail(it) })
     }
 
@@ -51,9 +51,9 @@ class StartFragment : Fragment() {
 
         when (appState) {
             is AppState.Success<*> -> {
-                val users = appState.data as List<User>?
-                if (!users.isNullOrEmpty()) {
-                    user = users.last()
+                val userData = appState.data as User?
+                userData?.let {
+                    user = userData
                     setUser()
                 }
             }
@@ -70,7 +70,7 @@ class StartFragment : Fragment() {
     }
 
     private fun initView() {
-
+        setTokenSettings(Token("",""))
         binding.singInButton.setOnClickListener {
             val email = binding.emailTextView.text.toString()
             val password = binding.passwordTextView.text.toString()
