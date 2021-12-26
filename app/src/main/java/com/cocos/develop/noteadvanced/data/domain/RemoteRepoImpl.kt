@@ -4,7 +4,6 @@ import com.cocos.develop.noteadvanced.data.NoteData
 import com.cocos.develop.noteadvanced.data.Token
 import com.cocos.develop.noteadvanced.data.User
 import com.cocos.develop.noteadvanced.data.datasource.NoteApi
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -23,25 +22,34 @@ class RemoteRepoImpl(private val noteApi: NoteApi) : RemoteRepository {
     }
 
     override fun getFavorite(access: String): Single<List<NoteData>> {
-        return  noteApi.getFavorite(access)
+        return noteApi.getFavorite(access)
     }
 
     override fun putNote(access: String, noteData: NoteData): Single<NoteData> {
         return if (noteData.id == 1) {
             noteApi.postNote(access, noteData)
         } else {
-            noteApi.putNote(noteData.id,access,noteData)
+            noteApi.putNote(noteData.id, access, noteData)
         }
     }
 
-    override fun putUser(access: String?,user: User): Single<User>{
+    override fun putUser(access: String?, user: User): Single<User> {
         return if (user.id == 1) {
             noteApi.postUser(user)
         } else {
-            access?.let {
-                noteApi.putUser(user.id,it,user)
+            if (access == null){
+                noteApi.postUser(user)
+            }else{
+                noteApi.putUser(user.id, access, user)
             }
-            noteApi.postUser(user)
         }
+    }
+
+    override fun getUser(id: Int, access: String): Single<User> {
+       return noteApi.getUser(id, access)
+    }
+
+    override fun getUserId(access: String): Single<List<User>> {
+        return noteApi.getUserId(access)
     }
 }

@@ -38,7 +38,7 @@ class StartViewModel: ViewModel() {
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
-                    { token -> _startLiveData.postValue(AppState.Success<Token>(token))},
+                    { token -> _startLiveData.postValue(AppState.Success(token))},
                     { error ->
                         _startLiveData.postValue(AppState.Error(error))
                         Log.e("Error authorization", error.message.toString())
